@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import SimpleMDE from 'simplemde';
+import EasyMDE from 'easymde';
 import marked from 'marked';
 
 export default {
@@ -50,11 +50,14 @@ export default {
   },
   methods: {
     initialize() {
-      const configs = Object.assign({
-        element: this.$el.firstElementChild,
-        initialValue: this.value,
-        renderingConfig: {},
-      }, this.configs);
+      const configs = Object.assign(
+        {
+          element: this.$el.firstElementChild,
+          initialValue: this.value,
+          renderingConfig: {},
+        },
+        this.configs,
+      );
 
       // 同步 value 和 initialValue 的值
       if (configs.initialValue) {
@@ -70,7 +73,7 @@ export default {
       marked.setOptions({ sanitize: this.sanitize });
 
       // 实例化编辑器
-      this.simplemde = new SimpleMDE(configs);
+      this.simplemde = new EasyMDE(configs);
 
       // 添加自定义 previewClass
       const className = this.previewClass || '';
@@ -106,10 +109,11 @@ export default {
 
 <style>
 .markdown-editor .markdown-body {
-  padding: 0.5em
+  padding: 0.5em;
 }
 
-.markdown-editor .editor-preview-active, .markdown-editor .editor-preview-active-side {
+.markdown-editor .editor-preview-active,
+.markdown-editor .editor-preview-active-side {
   display: block;
 }
 </style>
